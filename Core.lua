@@ -1,6 +1,6 @@
 local ADDON, NS = ...
 
-local Buffer = LibStub("AceAddon-3.0"):NewAddon(ADDON, "AceConsole-3.0", "AceEvent-3.0")
+local Buffer = LibStub("AceAddon-3.0"):NewAddon(ADDON, "AceConsole-3.0")
 local Toast = LibStub("LibToast-1.0")
 local AceGUI = LibStub("AceGUI-3.0")
 
