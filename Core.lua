@@ -127,7 +127,7 @@ function Buffer:IterateAuras(unit, filter)
       local name, texture = ...;  
       local description = _G[ADDON .. "ScanningTooltipTextLeft2"]:GetText()
 
-      if string.len(description) < 1 then
+      if not description or string.len(description) < 1 then
         description = "\n"
       end
 
