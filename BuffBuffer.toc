@@ -1,0 +1,9 @@
+## Interface: 90002
+## Title: BuffBuffer
+## Description: A display for random buffs (and debuffs) you aquire in your adventures.
+## Author: Jason L Perry
+## Version: 1.0
+## SavedVariables: BuffBufferDB
+
+embeds.xml
+Core.lua
