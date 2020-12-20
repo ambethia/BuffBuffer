@@ -123,7 +123,8 @@ function Buffer:IterateAuras(unit, filter)
       local lines = {}
       for i = 1, self.tooltip:NumLines() do
         local text = _G[self.tooltip:GetName() .. "TextLeft" .. i]:GetText();
-        local color = string.match(text, "remaining") and "FFFF00" or "FFFFFF" -- TODO: Be sure this is ACTUALLY the remaining time text line.
+        -- TODO: Be sure this is ACTUALLY the remaining time text line.
+        local color = string.match(text, "remaining") and "FFFF00" or "FFFFFF"
         if text ~= name then
           tinsert(lines, "|cFF" .. color .. text .. "|r")
         end
@@ -161,3 +162,18 @@ function Buffer:EmbedBlizOptions()
 
   _G.InterfaceOptions_AddCategory(panel)
 end
+
+LibStub("LibDataBroker-1.1"):NewDataObject(ADDON, {
+  type = "data source",
+  text = "",
+  label = ADDON,
+  icon = "Interface\\Icons\\inv_misc_scrollunrolled01b",
+  OnClick = function()
+    Buffer:ShowRecentAuras()
+  end,
+  OnTooltipShow = function(tt)
+    tt:AddLine(ADDON)
+    tt:AddLine(" ")
+    tt:AddLine("Show Recent & Ignored Auras")
+  end
+})

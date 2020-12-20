@@ -6,6 +6,7 @@
   <Include file="Libs\AceDB-3.0\AceDB-3.0.xml"/>
   <Include file="Libs\AceGUI-3.0\AceGUI-3.0.xml"/>
   <Include file="Libs\LibToast-1.0\lib.xml"/>
+  <Script file="Libs\LibDataBroker-1.1.lua"/>
   
   <Script file="Core.lua"/>
 
