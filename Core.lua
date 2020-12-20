@@ -123,8 +123,9 @@ function Buffer:IterateAuras(unit, filter)
       local lines = {}
       for i = 1, self.tooltip:NumLines() do
         local text = _G[self.tooltip:GetName() .. "TextLeft" .. i]:GetText();
+        local color = string.match(text, "remaining") and "FFFF00" or "FFFFFF" -- TODO: Be sure this is ACTUALLY the remaining time text line.
         if text ~= name then
-          tinsert(lines, text)
+          tinsert(lines, "|cFF" .. color .. text .. "|r")
         end
       end
 
