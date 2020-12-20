@@ -23,13 +23,7 @@ function Buffer:OnInitialize()
     self:ShowRecentAuras()
   end)
 
-  local tooltip = CreateFrame("GameTooltip", ADDON .. "ScanningTooltip")
-  tooltip:SetOwner(WorldFrame, "ANCHOR_NONE")
-  tooltip:AddFontStrings(
-    tooltip:CreateFontString("$parentTextLeft1", nil, "GameTooltipText"),
-    tooltip:CreateFontString("$parentTextRight1", nil, "GameTooltipText")
-  )
-  self.tooltip = tooltip
+  self.tooltip = _G["BuffBufferScanningTooltip"]
   
   self.auraEventFrame = CreateFrame("Frame")
   self.auraEventFrame:RegisterUnitEvent("UNIT_AURA", "player", "vehicle")
@@ -118,18 +112,23 @@ function Buffer:IterateAuras(unit, filter)
   local index = 1
   ForEachAura(unit, filter, MAX_AURAS, function(...)
     local spellID = select(10, ...)
+    local name, texture = ...
 
     tinsert(self.newAuras, spellID)
 
-    if not tContains(self.oldAuras, spellID) and not tContains(self.db.profile.ignoredAuras, spellID) then
+    if not tContains(self.oldAuras, spellID) and not tContains(self.db.profile.ignoredAuras, spellID) then  
       self.tooltip:ClearLines()
-      self.tooltip:SetUnitAura(unit, index, filter);
-      local name, texture = ...;  
-      local description = _G[ADDON .. "ScanningTooltipTextLeft2"]:GetText()
-
-      if not description or string.len(description) < 1 then
-        description = "\n"
+      self.tooltip:SetUnitAura(unit, index, filter)
+            
+      local lines = {}
+      for i = 1, self.tooltip:NumLines() do
+        local text = _G[self.tooltip:GetName() .. "TextLeft" .. i]:GetText();
+        if text ~= name then
+          tinsert(lines, text)
+        end
       end
+
+      local description = table.concat(lines, "\n")
 
       Toast:Spawn(ADDON .. "Toast", name, texture, description)
       tinsert(self.oldAuras, spellID)

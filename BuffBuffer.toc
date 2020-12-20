@@ -5,5 +5,4 @@
 ## Version: 1.0
 ## SavedVariables: BuffBufferDB
 
-embeds.xml
-Core.lua
+BuffBuffer.xml
